@@ -26,12 +26,12 @@ AKTIV EFFEKT 3-FAS ~: P=U*I*sqrt(3)*cos()
 #include <stdbool.h>
 //#include "funktioner.h"
 
-double ohms_lag(double r, double i){
 
-    double u = i * r;
-
-    return u;
+void multiplication (double a, double b){
+  double sum = a * b;
+  return sum;
 }
+
 
 double res_tot(double r1, double r2, double r3){
 
@@ -42,12 +42,7 @@ double res_tot(double r1, double r2, double r3){
     return rtot;
 }
 
-double eff_enk(double u, double i){
 
-    double p = u * i;
-
-    return p;
-}
 
 double sken_eff(double u, double i){
 
@@ -56,6 +51,7 @@ double sken_eff(double u, double i){
     return s;
 
 }
+*/
 
 double aktiv_eff(double u, double i, double cos){
 
@@ -67,14 +63,14 @@ double aktiv_eff(double u, double i, double cos){
 
 double sken_3fas(double u, double i){
 
-    double s = u * i * sqrt(3);
+    double s = (multiplication) * sqrt(3);
 
     return s;
 }
 
 double aktiv_3fas(double u, double i, double cos){
 
-    double p = u * i * sqrt(3) * cos;
+    double p = (multiplication) * sqrt(3) * cos;
 
     return p;
 }
@@ -125,7 +121,7 @@ int main()
                 continue;
             }
 
-            printf("%f V\n", ohms_lag(r, i));
+            printf("%f V\n", multiplication(r, i));
 
         }
 
@@ -173,7 +169,7 @@ int main()
                 printf("För högt värde, försök igen: \n");
                 continue;
             }
-            printf("%f W\n", eff_enk(u, i));
+            printf("%f W\n", multiplication(u, i));
         }
         else if(val == 4)
         {
