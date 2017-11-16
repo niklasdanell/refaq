@@ -31,11 +31,92 @@ double multiplication (double a, double b){
   return sum;
 }
 
-
 double res_tot(double r1, double r2, double r3){
     double rtot= (1/r1) + (1/r2) + (1/r3);
     rtot= 1/rtot;
     return rtot;
+}
+
+void ohms (void){
+  printf("Ohms lag spänningen(volt/V) betäckning U lika med Resistansen(Ohm) betäckning R \n"
+  "gånger Strömmen(Ampere) med betäckningen I. Kort U=R*I. \n\n");
+  double r, i;
+  printf("Skriv resistans R < 20 000ohm: \n ");
+    scanf("%lf", &r);
+        while(r > 20000)
+        {
+          printf("För högt värde, försök igen: \n");
+          scanf("%lf", &r);
+          }
+    printf("Skriv ström I < 440 Ampere: \n");
+    scanf("%lf", &i);
+              while(i > 440)
+              {
+                  printf("För högt värde, försök igen: \n");
+                  scanf("%lf", &i);
+              }
+
+    printf("%f V\n", multiplication(r, i));
+}
+
+void rtot (void){
+  printf("Resistans sammankopplade i parallella kretsar är lika med 1 delat Resistans R total är lika med\n");
+  printf("Resistans 1/R1 + 1/R2 + 1/R3 då vi högst använder tre resistanser.\n\n");
+  double r1,r2,r3;
+  printf("Skriv resistans R1 < 20 000ohm: \n ");
+  scanf("%lf", &r1);
+          while(r1 > 20000)
+          {
+              printf("För högt värde, försök igen: \n");
+              scanf("%lf", &r1);
+          }
+    printf("Skriv resistans R2 < 20 000ohm: \n ");
+    scanf("%lf", &r2);
+          while(r2 > 20000)
+          {
+              printf("För högt värde, försök igen: \n");
+              scanf("%lf", &r2);
+          }
+    printf("Skriv resistans R3 < 20 000ohm: \n ");
+    scanf("%lf", &r3);
+          while(r3 > 20000)
+          {
+              printf("För högt värde, försök igen: \n");
+              scanf("%lf", &r3);
+          }
+  printf("%f Ohm\n", res_tot(r1, r2, r3));
+}
+
+void el_lag(void){
+    printf("Effektlagen enkel för likström är effekten P i Watt (W) lika med spänningen U i volt(V)\n");
+    printf("gånger strömmen I i Ampere(A): \n\n");
+    double u, i;
+    printf("Skriv spännngen U i volt(V): \n ");
+    scanf("%lf", &u);
+    printf("Skriv ström Ampere I < 440A: \n");
+    scanf("%lf", &i);
+      while(i > 440)
+      {
+          printf("För högt värde, försök igen: \n");
+          scanf("%lf", &i);
+      }
+  printf("%f W\n", multiplication(u, i));
+}
+
+void enfas (void){
+    printf("Skenbar effekt enfas räknas med storheten VA(VoltAmpere) som är lika med spänningen U i volt(V)\n");
+    printf("gånger strömmen I i ampere(A)\n\n");
+    double u, i;
+    printf("Skriv Spänningen U i volt: \n ");
+    scanf("%lf", &u);
+    printf("Skriv ström I < 440A: \n");
+    scanf("%lf", &i);
+      while(i > 440)
+      {
+          printf("För högt värde, försök igen: \n");
+          scanf("%lf", &i);
+      }
+  printf("%f VA\n", multiplication(u, i));
 }
 
 int main()
@@ -61,94 +142,22 @@ int main()
 
         scanf("%d", &val);
 
-        if(val == 1)
-        {
-
-            printf("Ohms lag spänningen(volt/V) betäckning U lika med Resistansen(Ohm) betäckning R \n");
-            printf("gånger Strömmen(Ampere) med betäckningen I. Kort U=R*I. \n\n");
-            double r, i;
-            printf("Skriv resistans R < 20 000ohm: \n ");
-            scanf("%lf", &r);
-            if(r > 20000)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-
-            printf("Skriv ström I < 440 Ampere: \n");
-            scanf("%lf", &i);
-            if(i > 440)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-
-            printf("%f V\n", multiplication(r, i));
-
+        if(val == 1){
+          ohms();
         }
 
         else if(val == 2)
         {
-            printf("Resistans sammankopplade i parallella kretsar är lika med 1 delat Resistans R total är lika med\n");
-            printf("Resistans 1/R1 + 1/R2 + 1/R3 då vi högst använder tre resistanser.\n\n");
-            double r1,r2,r3;
-            printf("Skriv resistans R1 < 20 000ohm: \n ");
-            scanf("%lf", &r1);
-            if(r1 > 20000)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-            printf("Skriv resistans R2 < 20 000ohm: \n ");
-            scanf("%lf", &r2);
-            if(r2 > 20000)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-            printf("Skriv resistans R3 < 20 000ohm: \n ");
-            scanf("%lf", &r3);
-            if(r3 > 20000)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-            printf("%f Ohm\n", res_tot(r1, r2, r3));
+          rtot();
         }
 
         else if(val == 3)
         {
-
-            printf("Effektlagen enkel för likström är effekten P i Watt (W) lika med spänningen U i volt(V)\n");
-            printf("gånger strömmen I i Ampere(A): \n\n");
-            double u, i;
-            printf("Skriv spännngen U i volt(V): \n ");
-            scanf("%lf", &u);
-            printf("Skriv ström Ampere I < 440A: \n");
-            scanf("%lf", &i);
-            if(i > 440)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-            printf("%f W\n", multiplication(u, i));
+            el_lag();
         }
         else if(val == 4)
         {
-
-            printf("Skenbar effekt enfas räknas med storheten VA(VoltAmpere) som är lika med spänningen U i volt(V)\n");
-            printf("gånger strömmen I i ampere(A)\n\n");
-            double u, i;
-            printf("Skriv Spänningen U i volt: \n ");
-            scanf("%lf", &u);
-            printf("Skriv ström I < 440A: \n");
-            scanf("%lf", &i);
-            if(i > 440)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-            printf("%f VA\n", multiplication(u, i));
+          enfas();
         }
 
         else if(val == 5)
