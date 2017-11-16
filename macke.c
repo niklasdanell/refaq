@@ -25,6 +25,7 @@ AKTIV EFFEKT 3-FAS ~: P=U*I*sqrt(3)*cos()
 #include <limits.h>
 #include <stdbool.h>
 //#include "funktioner.h"
+int val;
 
 double multiplication (double a, double b){
   double sum = a*b;
@@ -36,7 +37,20 @@ double res_tot(double r1, double r2, double r3){
     rtot= 1/rtot;
     return rtot;
 }
-
+int startup (void){
+  printf("\nVälj vilka storheter du vill beräkna:\n"
+  "Välj 1 för: OHMS LAG\n"
+  "Välj 2 för: Rtot\n"
+  "Välj 3 för: EFFEKTLAGEN ENKEL\n"
+  "Välj 4 för: SKENBAR EFFEKT ENFAS\n"
+  "Välj 5 för: AKTIV EFFEKT/MEDELEFFEKT ENFAS\n"
+  "Välj 6 för: SKENBAR EFFEKT 3-FAS\n"
+  "Välj 7 för: AKTIV EFFEKT 3-FAS\n"
+  "Välj 0 för: FÖR ATT AVSLUTA\n");
+  scanf("%d", &val);
+  
+return val;
+}
 void ohms (void){
   printf("Ohms lag spänningen(volt/V) betäckning U lika med Resistansen(Ohm) betäckning R \n"
   "gånger Strömmen(Ampere) med betäckningen I. Kort U=R*I. \n\n");
@@ -119,6 +133,79 @@ void enfas (void){
   printf("%f VA\n", multiplication(u, i));
 }
 
+void aktiv_effekt (void){
+    printf("Aktiv medelefdekt enfas är lika med effekt P i watt(W) lika med spänningen U i volt(V) gånger strömmen I \n");
+    printf("i Ampere gånger cosinus fi/efkektfaktor < 1:\n\n");
+    double u, i, cos;
+    printf("Skriv spänning U i volt: \n ");
+    scanf("%lf", &u);
+    printf("Skriv ström I: \n");
+    scanf("%lf", &i);
+      while(i > 440){
+          printf("För högt värde, försök igen:\n");
+          scanf("%lf", &i);
+      }
+    printf("Skriv in effektfaktorn cos > 0 && cos < 1:\n");
+    scanf("%lf", &cos);
+      while (cos < 0 && cos > 1)
+      {
+          printf("Fel värde, försök igen\n");
+          scanf("%lf", &cos);
+      }
+  printf("%f W\n", (multiplication(u, i)*cos));
+}
+
+void skenbar_3fas(void) {
+    printf("3-fas skenbar effekt är växelspänning är skenbar effekt S i voltampere(VA) lika med spänningen U i volt(V) \n");
+    printf("gånger strömmen I i ampere(A) gånger roten ur 3 SQRT(3).\n\n");
+    double u, i;
+    printf("Skriv spänning U i volt(V) < 400V: \n ");
+    scanf("%lf", &u);
+      while(u > 400)
+      {
+          printf("För högt värde, försök igen: \n");
+          scanf("%lf", &u);
+      }
+
+    printf("Skriv ström I i ampere < 440: \n");
+    scanf("%lf", &i);
+      while(i > 440)
+      {
+          printf("För högt värde, försök igen: \n");
+          scanf("%lf", &i);
+      }
+  printf("%f VA\n", (multiplication(u, i)* sqrt(3)));
+}
+
+void aktiv_3fas (void){
+    printf("3-fas aktiv effekt är effekten P i Watt(W) lika med spänningen U i volt(V) gånger strömmen I i ampere(A)\n");
+    printf("gånger cos < 1 && cos > 0 gånger roten ur 3 SQRT(3).\n\n");
+    double u, i, cos;
+    printf("Skriv Spänningen U i volt(V): \n ");
+    scanf("%lf", &u);
+      while(u > 400)
+      {
+          printf("För högt värde, försök igen.\n");
+          scanf("%lf", &u);
+      }
+    printf("Skriv ström I i ampere(A): \n");
+    scanf("%lf", &i);
+      while(i > 440)
+      {
+          printf("För högt värde, försök igen.\n");
+          scanf("%lf", &i);
+      }
+
+    printf("Skriv in effektfaktorn cos > 0 && cos < 1: \n");
+    scanf("%lf", &cos);
+      while (cos < 0 && cos > 1)
+      {
+          printf("För högt värde, försök igen: \n");
+          scanf("%lf", &cos);
+      }
+  printf("%f W\n", (multiplication(u ,i)* sqrt(3) * cos));
+}
+
 int main()
 {
     system("chcp 1252");
@@ -127,123 +214,36 @@ int main()
 
     while (exit == false)
     {
-        printf("\n");
-        int val;
+        startup();
 
-        printf("Välj vilka storheter du vill beräkna:\n"
-        "Välj 1 för: OHMS LAG\n"
-        "Välj 2 för: Rtot\n"
-        "Välj 3 för: EFFEKTLAGEN ENKEL\n"
-        "Välj 4 för: SKENBAR EFFEKT ENFAS\n"
-        "Välj 5 för: AKTIV EFFEKT/MEDELEFFEKT ENFAS\n"
-        "Välj 6 för: SKENBAR EFFEKT 3-FAS\n"
-        "Välj 7 för: AKTIV EFFEKT 3-FAS\n"
-        "Välj 0 för: FÖR ATT AVSLUTA\n");
-
-        scanf("%d", &val);
 
         if(val == 1){
           ohms();
         }
+          else if(val == 2){
+            rtot();
+          }
 
-        else if(val == 2)
-        {
-          rtot();
+          else if(val == 3){
+              el_lag();
+          }
+          else if(val == 4){
+            enfas();
+          }
+          else if(val == 5){
+            aktiv_effekt();
+          }
+          else if(val == 6){
+            skenbar_3fas();
+          }
+          else if(val == 7){
+            aktiv_3fas();
+          }
+          else if (val == 0){
+              exit = true;
+          }
+        else{
+        printf("Fel alternativ försök igen!: \n");
         }
-
-        else if(val == 3)
-        {
-            el_lag();
-        }
-        else if(val == 4)
-        {
-          enfas();
-        }
-
-        else if(val == 5)
-        {
-            printf("Aktiv medelefdekt enfas är lika med effekt P i watt(W) lika med spänningen U i volt(V) gånger strömmen I \n");
-            printf("i Ampere gånger cosinus fi/efkektfaktor < 1:\n\n");
-            double u, i, cos;
-            printf("Skriv spänning U i volt: \n ");
-            scanf("%lf", &u);
-            printf("Skriv ström I: \n");
-            scanf("%lf", &i);
-            if(i > 440){
-                printf("För högt värde, försök igen:\n");
-                continue;
-            }
-            printf("Skriv in effektfaktorn cos > 0 && cos < 1:\n");
-            scanf("%lf", &cos);
-            if (cos < 0 && cos > 1)
-            {
-                printf("Fel värde, försök igen\n");
-                continue;
-            }
-            printf("%f W\n", (multiplication(u, i)*cos));
-        }
-        else if(val == 6)
-        {
-            printf("3-fas skenbar effekt är växelspänning är skenbar effekt S i voltampere(VA) lika med spänningen U i volt(V) \n");
-            printf("gånger strömmen I i ampere(A) gånger roten ur 3 SQRT(3).\n\n");
-            double u, i;
-            printf("Skriv spänning U i volt(V) < 400V: \n ");
-            scanf("%lf", &u);
-            if(u > 400)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-
-            printf("Skriv ström I i ampere < 440: \n");
-            scanf("%lf", &i);
-            if(i > 440)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-            printf("%f VA\n", (multiplication(u, i)* sqrt(3)));
-        }
-        else if(val == 7)
-        {
-
-            printf("3-fas aktiv effekt är effekten P i Watt(W) lika med spänningen U i volt(V) gånger strömmen I i ampere(A)\n");
-            printf("gånger cos < 1 && cos > 0 gånger roten ur 3 SQRT(3).\n\n");
-            double u, i, cos;
-            printf("Skriv Spänningen U i volt(V): \n ");
-            scanf("%lf", &u);
-            if(u > 400)
-            {
-                printf("För högt värde, försök igen.\n");
-                continue;
-            }
-            printf("Skriv ström I i ampere(A): \n");
-            scanf("%lf", &i);
-            if(i > 440)
-            {
-                printf("För högt värde, försök igen.\n");
-                continue;
-            }
-
-            printf("Skriv in effektfaktorn cos > 0 && cos < 1: \n");
-            scanf("%lf", &cos);
-            if (cos < 0 && cos > 1)
-            {
-                printf("För högt värde, försök igen: \n");
-                continue;
-            }
-
-            printf("%f W\n", (multiplication(u ,i)* sqrt(3) * cos));
-        }
-        else if (val == 0)
-        {
-            exit = true;
-        }
-        else
-        {
-            printf("Fel alternativ försök igen!: \n");
-        }
-    }
-
-    return 0;
+      }
 }
