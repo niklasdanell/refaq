@@ -26,9 +26,8 @@ AKTIV EFFEKT 3-FAS ~: P=U*I*sqrt(3)*cos()
 #include <stdbool.h>
 //#include "funktioner.h"
 
-
-void multiplication (double a, double b){
-  double sum = a * b;
+double multiplication (double a, double b){
+  double sum = a*b;
   return sum;
 }
 
@@ -43,34 +42,16 @@ double res_tot(double r1, double r2, double r3){
 }
 
 
-
-double sken_eff(double u, double i){
-
-    double s = u * i;
-
-    return s;
-
-}
-*/
-
-double aktiv_eff(double u, double i, double cos){
-
-    double p = u * i * cos;
-
-    return p;
-
-}
-
 double sken_3fas(double u, double i){
 
-    double s = (multiplication) * sqrt(3);
+    double s = u * i * sqrt(3);
 
     return s;
 }
 
 double aktiv_3fas(double u, double i, double cos){
 
-    double p = (multiplication) * sqrt(3) * cos;
+    double p = u * i * sqrt(3) * cos;
 
     return p;
 }
@@ -186,7 +167,7 @@ int main()
                 printf("För högt värde, försök igen: \n");
                 continue;
             }
-            printf("%f VA\n", sken_eff(u, i));
+            printf("%f VA\n", multiplication(u, i));
         }
 
         else if(val == 5)
@@ -209,7 +190,7 @@ int main()
                 printf("Fel värde, försök igen\n");
                 continue;
             }
-            printf("%f W\n", aktiv_eff(u, i, cos));
+            printf("%f W\n", (multiplication(u, i)*cos));
         }
         else if(val == 6)
         {
