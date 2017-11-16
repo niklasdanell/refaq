@@ -33,29 +33,10 @@ double multiplication (double a, double b){
 
 
 double res_tot(double r1, double r2, double r3){
-
-
     double rtot= (1/r1) + (1/r2) + (1/r3);
     rtot= 1/rtot;
-
     return rtot;
 }
-
-
-double sken_3fas(double u, double i){
-
-    double s = u * i * sqrt(3);
-
-    return s;
-}
-
-double aktiv_3fas(double u, double i, double cos){
-
-    double p = u * i * sqrt(3) * cos;
-
-    return p;
-}
-
 
 int main()
 {
@@ -212,7 +193,7 @@ int main()
                 printf("För högt värde, försök igen: \n");
                 continue;
             }
-            printf("%f VA\n", sken_3fas(u, i));
+            printf("%f VA\n", (multiplication(u, i)* sqrt(3)));
         }
         else if(val == 7)
         {
@@ -243,7 +224,7 @@ int main()
                 continue;
             }
 
-            printf("%f W\n", aktiv_3fas(u ,i, cos));
+            printf("%f W\n", (multiplication(u ,i)* sqrt(3) * cos));
         }
         else if (val == 0)
         {
